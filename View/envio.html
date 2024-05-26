@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Generador de Código QR</title>
+  <style>
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      padding: 0;
+      background-color: #FFD9E6;
+      font-family: "Comic Sans MS", cursive, sans-serif;
+    }
+
+    form {
+      text-align: center;
+    }
+
+    input[type="text"],
+    input[type="number"] {
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #FF80BF;
+      margin-bottom: 10px;
+    }
+
+    button[type="submit"] {
+      padding: 10px 20px;
+      border-radius: 5px;
+      border: none;
+      background-color: #FF80BF;
+      color: white;
+      font-weight: bold;
+    }
+
+    #codigoQR {
+      width: 70vw;
+      max-width: 400px;
+      margin: 20px auto;
+      background-color: #FFF0F5;
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
+    }
+
+    #codigoQR img {
+      max-width: 100%;
+      height: auto;
+      margin-bottom: 20px;
+    }
+
+    .descargar {
+      text-align: center;
+    }
+
+    .descargar a {
+      padding: 10px 20px;
+      border-radius: 5px;
+      border: none;
+      background-color: #FF80BF;
+      color: white;
+      font-weight: bold;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <form onsubmit="generarCodigoQR(); return false;">
+    <label for="nombre">Nombre:</label>
+    <input type="text" id="nombre" required><br>
+
+    <label for="apellido">Apellido:</label>
+    <input type="text" id="apellido" required><br>
+
+    <label for="edad">Edad:</label>
+    <input type="number" id="edad" required><br>
+
+    <label for="institucion">Institución:</label>
+    <input type="text" id="institucion" required><br>
+
+    <button type="submit">Generar Código QR</button>
+  </form>
+
+  <div id="codigoQR"></div>
+
+  <script>
+    function generarCodigoQR() {
+      var nombre = document.getElementById("nombre").value.replace(/ñ/gi, "678");
+      var apellido = document.getElementById("apellido").value.replace(/ñ/gi, "678");
+      var edad = document.getElementById("edad").value;
+      var institucion = document.getElementById("institucion").value.replace(/ñ/gi, "678");
+
+      var datos = [nombre, apellido, edad, institucion].join(",");
+
+      var url = "https://chart.googleapis.com/chart?cht=qr&chs=256x256&chl=" + encodeURIComponent(datos);
+
+      var codigoQR = document.getElementById("codigoQR");
+      codigoQR.innerHTML = "";
+
+      var img = document.createElement("img");
+      img.src = url;
+      img.alt = "Código QR";
+      codigoQR.appendChild(img);
+
+      var descargarLink = document.createElement("a");
+      descargarLink.href = url;
+      descargarLink.download = "codigoQR.png";
+      descargarLink.textContent = "Descargar QR en formato PNG";
+      descargarLink.classList.add("descargar");
+      descargarLink.addEventListener("click", function() {
+        descargarLink.style.display = "none"; // Ocultar el enlace para evitar que se muestre en la página
+        setTimeout(function() {
+          descargarLink.style.display = "block"; // Volver a mostrar el enlace después de la descarga
+        }, 1000); // Esperar 1 segundo antes de volver a mostrar el enlace
+      });
+      codigoQR.appendChild(descargarLink);
+      descargarLink.click(); // Simular el clic en el enlace de descarga
+    }
+  </script>
+</body>
+</html>

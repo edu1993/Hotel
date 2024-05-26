@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sistema de Gestión Hotelera - Agregar Habitación</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="index.html">
+        <i class="fas fa-home"></i>
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMenu" aria-controls="navbarMenu" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarMenu">
+        <ul class="navbar-nav ml-auto">
+          <!-- Coloca aquí los enlaces del menú -->
+        </ul>
+      </div>
+    </nav>
+  </header>
+
+  <div class="container mt-4">
+    <h2>Agregar Habitación</h2>
+    <form action="guardar_habitacion.php" method="POST">
+      <div class="form-group">
+        <label for="tipoHabitacion">Tipo de Habitación:</label>
+        <select class="form-control" id="tipoHabitacion" name="tipoHabitacion">
+          <option value="1">Tipo 1</option>
+          <option value="2">Tipo 2</option>
+          <option value="3">Tipo 3</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="piso">Piso:</label>
+        <select class="form-control" id="piso" name="piso">
+          <option value="0">0</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="numero">Número:</label>
+        <input type="number" class="form-control" id="numero" name="numero" required>
+      </div>
+      <div class="form-group">
+        <label for="estado">Estado:</label>
+        <select class="form-control" id="estado" name="estado">
+          <option value="limpia">Limpia</option>
+          <option value="sucia">Sucia</option>
+          <option value="ocupada">Ocupada</option>
+        </select>
+      </div>
+      <button type="submit" class="btn btn-primary">Agregar</button>
+    </form>
+  </div>
+
+  <footer class="mt-4">
+    <p>Teléfono: +1 234 567 890</p>
+    <p>Email: info@hotel.com</p>
+  </footer>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
