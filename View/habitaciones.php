@@ -5,13 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sistema de Gestión Hotelera</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <link rel="stylesheet" href="../assets/css/style.css">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <header>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <a class="navbar-brand" href="index.html">
+      <a class="navbar-brand" href="habitaciones.php">
         <i class="fas fa-home"></i>
       </a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMenu" aria-controls="navbarMenu" aria-expanded="false" aria-label="Toggle navigation">
@@ -43,7 +43,6 @@
               Empleados
             </a>
           </li>
-
           <li class="nav-item">
             <a class="nav-link" href="registro.html">
               <i class="fas fa-clipboard-list"></i>
@@ -63,31 +62,37 @@
       <table class="table">
         <thead>
           <tr>
-            <th>#</th>
-            <th>Tipo de Habitación</th>
+            <th>Numero</th>
+            <th>Descripcion</th>
             <th>Precio</th>
             <th>Estado</th>
             <th>Opciones</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>1</td>
-            <td>Habitación Individual</td>
-            <td>$100</td>
-            <td>Disponible</td>
-            <td>
-              <a href="modificar_habitacion.html"><i class="fas fa-edit"></i></a>
-              <a href="borrar_habitacion.html"><i class="fas fa-trash"></i></a>
-              <a href="ver_habitacion.html"><i class="fas fa-eye"></i></a>
-            </td>
-          </tr>
-          <!-- Agrega más filas según sea necesario -->
-          <tr>
-            <td colspan="5" style="text-align: center;">
-              <a href="agregar_habitacion.html" style="font-size: 20px;"><i class="fas fa-plus"></i> Agregar nueva habitación</a>
-            </td>
-          </tr>
+          <?php
+          require_once '../Controller/HabitacionController.php';
+          $controller = new HabitacionController();
+          $habitaciones = $controller->mostrarHabitaciones();
+
+          if (!empty($habitaciones)) {
+              foreach ($habitaciones as $row) {
+                  echo '<tr>
+                          <td>' . htmlspecialchars($row['NumHabitacion']) . '</td>
+                          <td>' . htmlspecialchars($row['Nombre']) . '</td>
+                          <td> 346 </td>
+                          <td> Desocupada </td>
+                          <td>
+                              <a href="modificar_habitacion.html?NumHabitacion=' . htmlspecialchars($row['NumHabitacion']) . '"><i class="fas fa-edit"></i></a>
+                              <a href="borrar_habitacion.html?NumHabitacion=' . htmlspecialchars($row['NumHabitacion']) . '"><i class="fas fa-trash"></i></a>
+                              <a href="ver_habitacion.html?NumHabitacion=' . htmlspecialchars($row['NumHabitacion']) . '"><i class="fas fa-eye"></i></a>
+                          </td>
+                        </tr>';
+              }
+          } else {
+              echo '<tr><td colspan="5">No se encontraron habitaciones.</td></tr>';
+          }
+          ?>
         </tbody>
       </table>
     </div>
