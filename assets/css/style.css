@@ -1,0 +1,103 @@
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Establece el tamaño mínimo del cuerpo al 100% de la altura de la ventana del navegador */
+  margin: 0;
+}
+
+header {
+  text-align: center;
+  padding: 1rem;
+  background-color: #f8f9fa;
+  width: 100%;
+}
+
+.sidebar {
+  width: 70px; /* Ancho cuando está colapsado */
+  background-color: #343a40;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  height: 100%;
+  top: 0;
+  left: 0;
+  padding-top: 1rem;
+  transition: width 0.3s;
+}
+
+.sidebar.expanded {
+  width: 250px; /* Ancho cuando está expandido */
+}
+
+.sidebar a {
+  color: #fff;
+  padding: 15px;
+  text-decoration: none;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  white-space: nowrap;
+  transition: all 0.3s;
+}
+
+.sidebar a .sidebar-text {
+  margin-left: 10px;
+  display: none;
+}
+
+.sidebar.expanded a .sidebar-text {
+  display: inline;
+}
+
+.sidebar a:hover {
+  background-color: #495057;
+}
+
+.sidebar i {
+  margin-right: 0;
+}
+
+.main-content {
+  margin-left: 70px; /* Margen izquierdo cuando la barra lateral está colapsada */
+  padding: 1rem;
+  flex: 1;
+  transition: margin-left 0.3s;
+}
+
+.sidebar.expanded + .main-content {
+  margin-left: 250px; /* Margen izquierdo cuando la barra lateral está expandida */
+}
+
+.dashboard {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.dashboard-item {
+  background-color: #f8f9fa;
+  padding: 1rem;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  text-decoration: none;
+  color: #343a40;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.dashboard-item img {
+  width: 100%;
+  height: auto;
+}
+
+footer {
+  text-align: center;
+  padding: 1rem;
+  background-color: #f8f9fa;
+  width: 100%;
+  flex-shrink: 0; /* Evita que el footer se encoja cuando hay poco contenido */
+}
